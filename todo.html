@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+<body>
+    
+    <article>
+        <h1>TODO APP</h1>
+
+        <form class="input" >  
+            <input type="text"  size="25" id="ip" placeholder="enter the text" >
+
+            <input type="button" class="submit" value="Add Task" onclick="Button()"/>
+        </form>
+
+    </article>
+
+ 
+    <main class="tasklist">
+        <h2>TASK</h2> 
+ 
+    </main>
+    <style>
+        *{
+    padding: 2px;
+    margin: 0px;
+    color: blue;
+  /* background-color: rgb(11, 246, 246); */
+}
+body{
+    background-color: rgb(14, 14, 48);
+    
+}
+article{
+     width: 100%;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: -3%;
+
+ }
+
+form{
+    display: flex;
+    padding: 2% 4%;
+    border-radius: 20px;
+    border: none;
+    font-size: 14px;
+}
+
+h1{
+    
+    margin-bottom: 2%;
+}
+
+.submit,.edit,.delete{
+    margin-left: 2%;
+    cursor: pointer;
+    border-radius: 15px;
+    padding: 2% 4%;
+    border: none;
+    color: white;
+    background-color: rgb(27, 205, 113);
+}
+
+.tasklist{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: -6%;
+
+
+}
+#list{
+    margin-left: -4%;
+    
+}
+
+
+    </style>
+
+
+    <script >
+
+        
+
+ 
+function Button()
+{
+    let userip=document.querySelector("#ip").value
+    userip=((userip.trim()))
+
+    if(!userip || userip.length==0)
+    {
+        alert("enter the task first")
+    }
+    else{
+
+
+    let ip=document.querySelector(".tasklist")
+
+    let div=document.createElement("form")
+    
+        div.setAttribute("class","added")
+     
+    
+    div.innerHTML=`
+    <input type="text" id="list" size="20" value="${userip}" readonly placeholder="enter the text" >
+    
+    <input type="button" class="edit" value="Edit" onclick="edit(event)">
+    <input type="button" class="delete" value="Delete" onclick="deleted(event)">`
+
+    ip.append(div)
+
+
+    }
+    
+}
+
+// function edit(a)
+// {
+//     let parent=document.querySelector(`.${a}`)
+//     let rem=document.querySelector(`#${a}`);
+   
+//     let edit=parent.querySelector(".edit");
+//     if((edit.value)=="Edit")
+//     {
+//      edit.value="Save"
+//      rem.removeAttribute("readonly")
+//     }
+//     else{
+//         edit.value="Edit"
+//      rem.setAttribute("readonly","")
+//     }
+// }
+
+function edit(event)
+{
+     
+    let parent=event.target.parentElement
+    let rem=parent.querySelector("#list")
+
+    let edit=parent.querySelector(".edit")
+    if((edit.value)=="Edit")
+        {
+         edit.value="Save"
+         rem.removeAttribute("readonly")
+        }
+        else{
+            if(!rem.value || (rem.value).trim().length==0)
+                alert("value can not be empty")
+            else{
+                rem.value=`${(rem.value).trim()}`
+            edit.value="Edit"
+         rem.setAttribute("readonly","")
+            }
+        
+        }
+
+}
+
+
+
+// function deleted(a)
+//     {
+//         let dele=document.querySelector(`.${a}`)
+//         dele.remove()
+         
+
+//     }
+
+function deleted(event)
+{
+    let del=event.target.parentElement;
+    del.style.display="none"
+      
+}
+    </script>
+</body>
+</html>
+
+ 
